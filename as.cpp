@@ -14,8 +14,8 @@ int main(int argc, char ** argv)
   
 	while(getline(in,line))
 	{
-    if(line.length() == 0) continue;                //skip empty lines
-    if(line[line.length() - 1] == ':') continue;    //label
+    		if(line.length() == 0) continue;                //skip empty lines
+    		if(line[line.length() - 1] == ':') continue;    //label
 
 		for(int i = 6; i < 14; i++)
 			cout<<line[i];

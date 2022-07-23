@@ -8,7 +8,7 @@ int main(int argc, char ** argv)
 	ifstream in;
 	in.open("asm.txt");
 	string line;
-	//start at line 7. Observing the output file asm.txt and you will know where 7 comes from
+	//start at line 7
 	int n = 7;
 	while(n--)getline(in,line);
   

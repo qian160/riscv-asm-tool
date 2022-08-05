@@ -5,7 +5,7 @@ _start:
   li x3,0x33
   li x4,0x44
 target:
-  nop
+  beqz x0,target
   nop
   nop
   nop

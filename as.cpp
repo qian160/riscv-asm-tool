@@ -4,16 +4,16 @@ using namespace std;
 #define LS line[start]
 //the difficulty is to deal with the .org psedo op
 int64_t hex2dec(string hex){
-    int64_t result = 0;		//res = res << 4 + hex[i]
-    int64_t adder  = 0;
-    for(char c: hex){
-	result = result << 4;
-	if(c == ' ') adder = 0;
-	else if(c >= '0' && c <= '9') adder = c - '0';
-	else 	adder = c - 'a' + 10;
-	result += adder;
-    }
-    return result;
+    	int64_t result = 0;		//res = res << 4 + hex[i]
+    	int64_t adder  = 0;
+    	for(char c: hex){
+		result = result << 4;
+		if(c == ' ') 			adder = 0;
+		else if(c >= '0' && c <= '9') 	adder = c - '0';
+		else 				adder = c - 'a' + 10;
+		result += adder;
+    	}
+    	return result;
 }
 
 string getAddress(string line){

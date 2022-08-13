@@ -43,21 +43,21 @@ int main(int argc, char ** argv)
 		exit(1);
 	}
 	string line;
-	int n = 7;	//start at line 7 
+	int n = 7;					//start at line 7 
 	while(n--)getline(in,line);
 	int64_t oldAddr = -4;
-	int64_t newAddr = 0;	//good: the difference is 4(no .org)
+	int64_t newAddr = 0;				//good: the difference is 4(no .org)
 	while(getline(in,line))
 	{
 		if(!check(line)) continue;
 		//when meet a .org psedo op, fill the space with nop
 		newAddr = hex2dec(getAddress(line));
 		int64_t diff = newAddr - oldAddr;
-		if(diff > 4){	//need to insert nop first
+		if(diff > 4){				//need to insert nop first
 			for (int i = diff >> 2; i > 0 ; i--)
 				cout<<"00000013"<<endl;			
 		}
-		else{	//a normal inst line
+		else{					//a normal inst line
 			int start = 0;
 			while(LS != ':') start ++;
 			while(!isdigit(LS) && !(LS >= 'a' && LS <= 'f')) start ++;
@@ -65,7 +65,6 @@ int main(int argc, char ** argv)
 				cout<<line[i];
 			cout<<endl;
 		}
-		//if(diff == 4) 
 		oldAddr = newAddr;
 	}
 	in.close();

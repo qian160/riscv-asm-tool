@@ -54,7 +54,7 @@ int main(int argc, char ** argv)
 			for (int i = diff >> 2; i > 0 ; i--)
 				cout<<"00000013"<<endl;			
 		}
-		else{	//6 and 14 need to be changed
+		else{	//a normal inst line
 			int start = 0;
 			while(line[start] != ':') start ++;
 			while(!isdigit(LS) && !(LS >= 'a' && LS <= 'f')) start ++;

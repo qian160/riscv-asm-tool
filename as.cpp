@@ -56,7 +56,7 @@ int main(int argc, char ** argv)
 		}
 		else{	//a normal inst line
 			int start = 0;
-			while(line[start] != ':') start ++;
+			while(LS != ':') start ++;
 			while(!isdigit(LS) && !(LS >= 'a' && LS <= 'f')) start ++;
 			for(int i = start; i < start + 8; i++)
 				cout<<line[i];

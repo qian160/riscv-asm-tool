@@ -16,6 +16,7 @@ int main(int argc, char ** argv)
 	{
     		if(line.length() == 0) continue;                //skip empty lines
     		if(line[line.length() - 1] == ':') continue;    //label
+    		if(line[line.length() - 1] == '.') continue;    //...
 
 		for(int i = 6; i < 14; i++)
 			cout<<line[i];

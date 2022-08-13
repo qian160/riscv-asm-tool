@@ -30,7 +30,7 @@ bool check(string s){
 		1. label 2.  ... 3.  empty line
 	*/
 	int len = s.length();
-	if(s[len -1] == ':' || s[len - 1] == '.' || len == 0) return false;
+	if(len == 0 || s[len -1] == ':' || s[len - 1] == '.') return false;
 	return true;
 }
 

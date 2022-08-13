@@ -2,7 +2,6 @@
 #include<fstream>
 using namespace std;
 #define LS line[start]
-//the difficulty is to deal with the .org psedo op
 //when meet a .org psedo op, fill the space with nop
 int64_t hex2dec(string hex){
     	int64_t result = 0;		//res = res << 4 + hex[i]

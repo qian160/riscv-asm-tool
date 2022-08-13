@@ -3,6 +3,7 @@
 using namespace std;
 #define LS line[start]
 //the difficulty is to deal with the .org psedo op
+//when meet a .org psedo op, fill the space with nop
 int64_t hex2dec(string hex){
     	int64_t result = 0;		//res = res << 4 + hex[i]
     	int64_t adder  = 0;
@@ -50,21 +51,18 @@ int main(int argc, char ** argv)
 	while(getline(in,line))
 	{
 		if(!check(line)) continue;
-		//when meet a .org psedo op, fill the space with nop
 		newAddr = hex2dec(getAddress(line));
 		int64_t diff = newAddr - oldAddr;
 		if(diff > 4){				//need to insert nop first
 			for (int i = diff >> 2; i > 0 ; i--)
 				cout<<"00000013"<<endl;			
 		}
-		else{					//a normal inst line
-			int start = 0;
-			while(LS != ':') start ++;
-			while(!isdigit(LS) && !(LS >= 'a' && LS <= 'f')) start ++;
-			for(int i = start; i < start + 8; i++)
-				cout<<line[i];
-			cout<<endl;
-		}
+		int start = 0;
+		while(LS != ':') start ++;
+		while(!isdigit(LS) && !(LS >= 'a' && LS <= 'f')) start ++;
+		for(int i = start; i < start + 8; i++)
+			cout<<line[i];
+		cout<<endl;
 		oldAddr = newAddr;
 	}
 	in.close();

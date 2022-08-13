@@ -38,9 +38,12 @@ int main(int argc, char ** argv)
 {
 	ifstream in;
 	in.open("asm.txt");
+	if(in.fail()){
+		cout<<"open file asm.txt failed!\n";
+		exit(1);
+	}
 	string line;
-	//start at line 7 
-	int n = 7;
+	int n = 7;	//start at line 7 
 	while(n--)getline(in,line);
 	int64_t oldAddr = -4;
 	int64_t newAddr = 0;	//good: the difference is 4(no .org)
@@ -65,4 +68,5 @@ int main(int argc, char ** argv)
 		//if(diff == 4) 
 		oldAddr = newAddr;
 	}
+	in.close();
 }

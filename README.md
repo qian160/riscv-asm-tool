@@ -1,5 +1,5 @@
 # #riscv-asm-tool
-​		translate your asm code to pure machine code. 
+		translate your asm code to pure machine code. 
 steps to use
 
           1. write your asm code in test.s

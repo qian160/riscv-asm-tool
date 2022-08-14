@@ -26,7 +26,7 @@ string getAddress(string line){
 }
 
 bool check(string s){
-	/*four bad cases:
+	/*three cases:
 		1. label 2.  ... 3.  empty line 4. unimp
 	*/
 	int len = s.length();
@@ -36,7 +36,6 @@ bool check(string s){
 
 int main(int argc, char ** argv)
 {
-	//bug: when first line didn't pass the check due to an 'unimp', an insert is needed. But diff will be kept to 4 so no insert is performed
 	ifstream in;
 	in.open("asm.txt");
 	if(in.fail()){
@@ -45,19 +44,22 @@ int main(int argc, char ** argv)
 	}
 	string line;
 	int n = 7;
-	while(n--)getline(in,line);		//start at line 7
+	while(n--)getline(in,line);				//start at line 7
 	int64_t oldAddr = -4;
-	int64_t newAddr = 0;			//good: the difference is 4(no .org)
+	int64_t newAddr = 0;					//good: the difference is 4(no .org)
+	bool firstLineFailed = false;
 	while(getline(in,line))
 	{
-		if(!check(line)) {
+		if(!check(line)) {				//if the first line fails the check, oldAddr need to be updated to 0;
+			firstLineFailed	= oldAddr > 0? false: true;
 			oldAddr = oldAddr >= 0? oldAddr : 0;
 			continue;
 		}
 		//when meet a .org psedo op, fill the space with nop
 		newAddr = hex2dec(getAddress(line));
 		int64_t diff = newAddr - oldAddr;
-		if(diff > 4){			//need to insert nop first
+		if(diff > 4 || firstLineFailed){		//need to insert nop first
+			firstLineFailed = false;		//fixed
 			for (int i = diff >> 2; i > 0 ; i--)
 				cout<<"00000013"<<endl;			
 		}

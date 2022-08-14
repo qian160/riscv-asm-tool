@@ -2,6 +2,7 @@
 #include<fstream>
 using namespace std;
 #define LS line[start]
+#define LL line.length()
 //the difficulty is to deal with the .org psedo op
 int64_t hex2dec(string hex){
     int64_t result = 0;		//res = res << 4 + hex[i]
@@ -25,11 +26,12 @@ string getAddress(string line){
 	return s;
 }
 
-bool check(string s){
+bool check(string s, int64_t & oldAddr){
 	/*three cases:
 		1. label 2.  ... 3.  empty line 4. unimp
 	*/
 	int len = s.length();
+	if(len >= 5 && s.substr(len - 5) == "unimp") oldAddr = oldAddr + 4;
 	if(s[len -1] == ':' || s[len - 1] == '.' || len == 0 || s.substr(len - 5) == "unimp") return false;
 	return true;
 }
@@ -44,32 +46,31 @@ int main(int argc, char ** argv)
 	}
 	string line;
 	int n = 7;
-	while(n--)getline(in,line);				//start at line 7
+	while(n--)getline(in,line);		//start at line 7
 	int64_t oldAddr = -4;
-	int64_t newAddr = 0;					//good: the difference is 4(no .org)
-	bool firstLineFailed = false;
+	int64_t newAddr = 0;			//good: the difference is 4(no .org)
+	bool lastIsUnimp = false;
 	while(getline(in,line))
 	{
-		if(!check(line)) {				//if the first line fails the check, oldAddr need to be updated to 0;
-			firstLineFailed	= oldAddr > 0? false: true;
-			oldAddr = oldAddr >= 0? oldAddr : 0;
+		
+		if(!check(line, oldAddr)) {	//oldAddr need to be updated when meet an unimp;
+			if(LL < 5 || line[LL - 1] != 'p' ) continue;
+			lastIsUnimp = LL >= 5 && line.substr(LL - 5) == "unimp";
 			continue;
 		}
 		//when meet a .org psedo op, fill the space with nop
 		newAddr = hex2dec(getAddress(line));
 		int64_t diff = newAddr - oldAddr;
-		if(diff > 4 || firstLineFailed){		//need to insert nop first
-			firstLineFailed = false;		//fixed
+		if(diff > 4 || lastIsUnimp){			//need to insert nop first
 			for (int i = diff >> 2; i > 0 ; i--)
 				cout<<"00000013"<<endl;			
 		}
 		int start = 0;
 		while(line[start] != ':') start ++;
 		while(!isdigit(LS) && !(LS >= 'a' && LS <= 'f')) start ++;
-		for(int i = start; i < start + 8; i++)
-			cout<<line[i];
-		cout<<endl;
+		cout << line.substr(start, start + 8) << endl;
 		oldAddr = newAddr;
+		lastIsUnimp = line.substr(LL - 5) == "unimp";
 	}
 	in.close();
 }

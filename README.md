@@ -1,5 +1,5 @@
 # #riscv-asm-tool
-        translate your asm code to pure machine code. 
+        translate your asm code to pure machine code. In fact this program just perform some I/Os based on the risc-v toolchain
 steps to use
 - 1. write your asm code in test.s
 - 2. make print: the machine code will be printed to the shell

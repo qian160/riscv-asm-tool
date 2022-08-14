@@ -26,12 +26,11 @@ string getAddress(string line){
 	return s;
 }
 
-bool check(string s, int64_t & oldAddr){
+bool check(string s){
 	/*three cases:
 		1. label 2.  ... 3.  empty line 4. unimp
 	*/
 	int len = s.length();
-	if(len >= 5 && s.substr(len - 5) == "unimp") oldAddr = oldAddr + 4;
 	if(s[len -1] == ':' || s[len - 1] == '.' || len == 0 || s.substr(len - 5) == "unimp") return false;
 	return true;
 }
@@ -53,7 +52,7 @@ int main(int argc, char ** argv)
 	while(getline(in,line))
 	{
 		
-		if(!check(line, oldAddr)) {	//oldAddr need to be updated when meet an unimp;
+		if(!check(line)){
 			if(LL < 5 || line[LL - 1] != 'p' ) continue;
 			lastIsUnimp = LL >= 5 && line.substr(LL - 5) == "unimp";
 			continue;
@@ -62,7 +61,7 @@ int main(int argc, char ** argv)
 		newAddr = hex2dec(getAddress(line));
 		int64_t diff = newAddr - oldAddr;
 		if(diff > 4 || lastIsUnimp){			//need to insert nop first
-			for (int i = diff >> 2; i > 0 ; i--)
+			for (int i = diff >> 2   ; i > 1 ; i--)
 				cout<<"00000013"<<endl;			
 		}
 		int start = 0;

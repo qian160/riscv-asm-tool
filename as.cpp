@@ -1,3 +1,4 @@
+//g++ -o as as.cpp
 #include<iostream>
 #include<fstream>
 using namespace std;

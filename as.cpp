@@ -2,7 +2,8 @@
 #include<fstream>
 #include<regex>
 using namespace std;
-int64_t hex2dec(string hex){
+int64_t hex2dec(string hex)
+{
 	int64_t result = 0;		//res = res << 4 + hex[i]
 	int64_t adder  = 0;
 	for(char c: hex){
@@ -15,7 +16,8 @@ int64_t hex2dec(string hex){
 	return result;
 }
 
-string getAddress(string line){
+string getAddress(string line)
+{
 	string s = "";
 	for(char c: line){
 		if(c == ':') break;
@@ -24,7 +26,8 @@ string getAddress(string line){
 	return s;
 }
 
-bool check(string s/*, int64_t & oldAddr*/){
+bool check(string s)
+{
 	/*	four bad cases:	1. label 2.  ... 3.  empty line 4. unimp	*/
 	int len = s.length();
 	if(len == 0 || s[len -1] == ':' || s[len - 1] == '.' || s.substr(len - 5) == "unimp") return false;

@@ -13,4 +13,4 @@ update:generate
 	@rm test.o
 
 clean:
-	rm asm.txt asm-original.txt 
+	rm asm.txt

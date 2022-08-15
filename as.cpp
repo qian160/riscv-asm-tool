@@ -2,7 +2,6 @@
 #include<fstream>
 #include<regex>
 using namespace std;
-#define LL line.length()
 int64_t hex2dec(string hex){
 	int64_t result = 0;		//res = res << 4 + hex[i]
 	int64_t adder  = 0;
@@ -20,14 +19,13 @@ string getAddress(string line){
 	string s = "";
 	for(char c: line){
 		if(c == ':') break;
-		else s += c;
+		s += c;
 	}
 	return s;
 }
 
 bool check(string s/*, int64_t & oldAddr*/){
-	/*three cases:
-		1. label 2.  ... 3.  empty line 4. unimp	*/
+	/*	four bad cases:	1. label 2.  ... 3.  empty line 4. unimp	*/
 	int len = s.length();
 	if(len == 0 || s[len -1] == ':' || s[len - 1] == '.' || s.substr(len - 5) == "unimp") return false;
 	return true;

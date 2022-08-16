@@ -2,7 +2,7 @@
 #include<fstream>
 #include<regex>
 using namespace std;
-int64_t hex2dec(string & hex)
+int64_t hex2dec(string hex)
 {
 	int64_t result = 0;		//res = res << 4 + hex[i]
 	int64_t adder  = 0;
@@ -16,7 +16,7 @@ int64_t hex2dec(string & hex)
 	return result;
 }
 
-string getAddress(string & line)
+string getAddress(string line)
 {
 	string s = "";
 	for(char c: line){

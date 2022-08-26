@@ -28,8 +28,7 @@ string getAddress(string line)
 
 bool check(string & s)
 {
-	/*three cases:
-		1. label 2.  ... 3.  empty line 4. unimp	*/
+	/*four bad cases:	1. label  2.  ... 3.  empty line  4. unimp	*/
 	int len = s.length();
 	if(len == 0 || s[len -1] == ':' || s[len - 1] == '.' || s.substr(len - 5) == "unimp") return false;
 	return true;

@@ -59,10 +59,8 @@ int main(int argc, char ** argv)
 		}
 		regex inst("[0-9a-f]{8}");
 		smatch m;
-		auto ret = regex_search(line, m, inst, regex_constants::match_default);
-		for(auto &a : m)
-			cout<<a;
-		cout<<endl;
+		regex_search(line, m, inst, regex_constants::match_default);
+		cout << m.str() << endl;
 		oldAddr = newAddr;
 	}
 	in.close();

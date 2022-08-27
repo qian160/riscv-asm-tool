@@ -12,8 +12,7 @@ int64_t hex2dec(string hex)
 	int64_t adder  = 0;
 	for(char c: hex){
 		result = result << 4;
-		if(c == ' ') 			adder = 0;
-		else if(c >= '0' && c <= '9') 	adder = c - '0';
+		if(c >= '0' && c <= '9') 	adder = c - '0';
 		else 				adder = c - 'a' + 10;
 		result += adder;
     	}

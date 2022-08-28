@@ -8,7 +8,7 @@ regex inst("\\s[0-9a-f]{8}\\s");
 
 int64_t hex2dec(string hex)
 {
-	int64_t result = 0;		//res = res << 4 + hex[i]
+	int64_t result = 0;				//res = res << 4 + hex[i]
 	int64_t adder  = 0;
 	for(char c: hex){
 		result = result << 4;
@@ -36,9 +36,9 @@ int main(int argc, char ** argv)
 	}
 	string line;
 	int n = 7;
-	while(n--)getline(in,line);		//start at line 7
+	while(n--)getline(in,line);				//start at line 7
 	int64_t oldAddr = -4;
-	int64_t newAddr = 0;			//good: the difference is 4(no .org)
+	int64_t newAddr = 0;					//good when the difference is 4
 	while(getline(in,line))
 	{
 		smatch m;
@@ -47,11 +47,11 @@ int main(int argc, char ** argv)
 		newAddr = hex2dec(getAddress(line));
 		int64_t diff = newAddr - oldAddr;
 		if(diff > 4)
-		{				//need to insert nop first
+		{						//need to insert nop first
 			for (int64_t i = diff >> 2 ; i > 1 ; i--)
 				cout<<"00000013"<<endl;			
 		}
-		cout << m.str().substr(1, 8) << endl;
+		cout << m.str().substr(1, 8) << endl;		//the 1st char is \t or ' '
 		oldAddr = newAddr;
 	}
 	in.close();

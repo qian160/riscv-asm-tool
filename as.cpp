@@ -8,15 +8,9 @@ regex inst("\\s[0-9a-f]{8}\\s");
 
 int64_t hex2dec(string hex)
 {
-	int64_t result = 0;				//res = res << 4 + hex[i]
-	int64_t adder  = 0;
-	for(char c: hex){
-		result = result << 4;
-		if(c >= '0' && c <= '9') 	adder = c - '0';
-		else 				adder = c - 'a' + 10;
-		result += adder;
-    	}
-	return result;
+	int64_t res;
+	sscanf(hex.c_str(), "%lx", &res);
+	return res;
 }
 
 string getAddress(string line)
